@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title>Main Dashboard</title>
+  <style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        border: 1px solid #000000;
+        background-color: #B4D3DC;
+        text-align: center;
+        padding: 8px;
+        font-size: 18px;
+    }
+
+    td {
+        border: 1px solid #000000;
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+    	border: 1px solid #000000;
+        background-color: #dddddd;
+    }
+   </style>
+</head>
+<!-- {{ machine_data }}
+ -->
+<input type="hidden" id="data" name="variable" value="{{ machine_data }}">
+
+<body>
+ <h2 align="center">Dashboard</h2>
+ <table style="width:80%", border= 1px, align="center">
+
+  <tr><th>Machine Number</th><th>Machine Description</th><th>Component Number</th><th>Component Description</th><th>Status</th><th>Time</th><th>Pieces</th><th>Average Cycle Time</th><th>Stops</th></tr>
+
+  <tr><td id="mno0" onclick="show_machine(
+  'M1')"></td><td id="md0"></td><td id="cno0" onclick="show_component('C5')"></td><td id="cd0"></td><td id="status0"></td><td id="time0"></td><td id="pieces0"></td><td id="avgct0"></td><td id="stops0"></td></tr>
+  
+  <tr><td id="mno1"></td><td id="md1"></td><td id="cno1"></td><td id="cd1"></td><td id="status1"></td><td id="time1"></td><td id="pieces1"></td><td id="avgct1"></td><td id="stops1"></td></tr>
+  
+  <tr><td id="mno2"></td><td id="md2"></td><td id="cno2"></td><td id="cd2"></td><td id="status2"></td><td id="time2"></td><td id="pieces2"></td><td id="avgct2"></td><td id="stops2"></td></tr>
+ 
+  <tr><td id="mno3"></td><td id="md3"></td><td id="cno3"></td><td id="cd3"></td><td id="status3"></td><td id="time3"></td><td id="pieces3"></td><td id="avgct3"></td><td id="stops3"></td></tr>
+ 
+  <tr><td id="mno4"></td><td id="md4"></td><td id="cno4"></td><td id="cd4"></td><td id="status4"></td><td id="time4"></td><td id="pieces4"></td><td id="avgct4"></td><td id="stops4"></td></tr>
+ 
+
+
+
+</table>
+
+<script>
+ 
+  var my_data = document.getElementById("data").value
+
+  for(cnt=0;cnt<5;cnt++)
+  {
+    document.getElementById("mno"+cnt).innerHTML = JSON.parse(my_data)[cnt].machine_number
+    document.getElementById("md"+cnt).innerHTML = JSON.parse(my_data)[cnt].machine_description
+    document.getElementById("cno"+cnt).innerHTML = JSON.parse(my_data)[cnt].component_number
+    document.getElementById("cd"+cnt).innerHTML = JSON.parse(my_data)[cnt].component_description
+    document.getElementById("status"+cnt).innerHTML = JSON.parse(my_data)[cnt].status
+    document.getElementById("time"+cnt).innerHTML = JSON.parse(my_data)[cnt].time_date
+    document.getElementById("pieces"+cnt).innerHTML = JSON.parse(my_data)[cnt].total_pieces
+    document.getElementById("avgct"+cnt).innerHTML = JSON.parse(my_data)[cnt].cycle_time
+    document.getElementById("stops"+cnt).innerHTML = JSON.parse(my_data)[cnt].stops
+    
+  }
+
+  function show_machine(mno)
+{
+  // alert(mno)
+  window.open("http://127.0.0.1:8000/machinedashboard/?mno="+mno, "_self")
+   // $.get("http://127.0.0.1:8000/machinedashboard/", {'alert': 123346}, function(data){
+
+   //  alert(data)
+
+
+   //   });
+
+  // window.open(snapshot_url, '_blank');
+   // $.post("http://127.0.0.1:8000/machinedashboard/", {"machine_number": "M1"},function(response){
+   //  my_data= JSON.parse(response)
+   //    alert(my_data.machine_number)
+  // });
+}
+
+  function show_component(cno)
+{
+  // alert(cno)
+  window.open("http://127.0.0.1:8000/componentdashboard/?cno="+cno, "_self")
+ 
+ }
+
+</script>
+
+
+</body>
+</html>
+
+

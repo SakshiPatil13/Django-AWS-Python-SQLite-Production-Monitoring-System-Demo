@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<!-- Card w3 url-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<!-- component data -->
+<!-- {{ component_data }} -->
+<input type="hidden" id="data" name="variable" value="{{ component_data }}">
+
+
+<head>
+	<title>Component Dashboard</title>
+	<h1 align="center">Component Dashboard</h1>
+
+	<!-- styling -->
+  	<style> 
+
+  		/*image styling*/
+  		img {
+    			border: 1px solid black;
+    			margin: 50px 50px 5px 60px;
+			}
+
+
+  		/*table styling*/
+	    table {
+	        font-family: arial, sans-serif;
+	        border-collapse: collapse;
+	        width: 100%;
+	        height: 70%;
+	        margin: 50px 50px 5px 0px;	/*margin format= margin-top margin-right margin-bottom margin-left*/
+	    }
+
+	    th {
+	        border: 1px solid #000000;
+	        background-color: #B4D3DC;
+	        text-align: center;
+	        padding: 8px;
+	        font-size: 18px;
+	    }
+
+	    td {
+	        border: 1px solid #000000;
+	        text-align: center;
+	        padding: 8px;
+	    }
+
+	    tr:nth-child(even) {
+	      border: 1px solid #000000;
+	        background-color: #dddddd;
+	    }
+	   </style>
+
+</head>
+
+<body>
+
+<!-- table code -->
+ <table style="width:60%", border= 1px, align="right">
+
+	<tr>	<!-- heading row of the table -->
+        <th>Machine Number</th>
+        <th>Machine Description</th>
+        <th>Time</th>
+        <th>Pieces</th>
+        <th>Average Cycle Time</th>
+    </tr>
+
+    <tr>	<!-- row 1 -->
+            <td id='mno0'></td>	<!-- id to show the dinamic data machine number, id shows updated values of mno0 i.e. machine number on which this componnet is attached-->
+            <td id='md0'></td>
+            <td id='time0'></td>
+            <td id='pieces0'></td>
+            <td id='avgct0'></td>
+    </tr>
+
+    <tr>	<!-- row 2 -->
+            <td id='mno1'></td>
+            <td id='md1'></td>
+            <td id='time1'></td>
+            <td id='pieces1'></td>
+            <td id='avgct1'></td>            
+    </tr>
+
+ 	<tr>	<!-- row 3 -->
+            <td id='mno2'></td>
+            <td id='md2'></td>
+            <td id='time2'></td>
+            <td id='pieces2'></td>
+            <td id='avgct2'></td>           
+    </tr>
+
+  	<tr>	<!-- row 4 -->
+            <td id='mno3'></td>
+            <td id='md3'></td>
+            <td id='time3'></td>
+            <td id='pieces3'></td>
+            <td id='avgct3'></td>            
+    </tr>
+
+    <tr>	<!-- row 5 -->
+            <td id='mno4'></td>
+            <td id='md4'></td>
+            <td id='time4'></td>
+            <td id='pieces4'></td>
+            <td id='avgct4'></td>            
+    </tr>
+
+    <tr>	<!-- row 6 -->
+            <td id='mno5'></td>
+            <td id='md5'></td>
+            <td id='time5'></td>
+            <td id='pieces5'></td>
+            <td id='avgct5'></td>            
+    </tr>
+
+    <tr>	<!-- row 7 -->
+            <td id='mno6'></td>
+            <td id='md6'></td>
+            <td id='time6'></td>
+            <td id='pieces6'></td>
+            <td id='avgct6'></td>            
+    </tr>
+
+</table>
+
+
+<!-- image code -->
+
+<img src="https://www.staformeccanica.it/files/0g85q3/steel_threaded_component.jpg" width="275" height="250", float="left" margin-left:"20">
+
+
+<!-- Details card code-->
+
+<div class="w3-container">
+<div class="w3-display-left" style="margin: 100px 10px 0px 50px; width:25%; border: 1px solid #000000;">
+    <header class="w3-container w3-blue" >
+      <h1>Details</h1>
+    </header>
+    <div class="w3-container">
+      <h> Component Number: </h>
+      <p id="cno"></p>
+      <h> Machine Description: </h>
+      <p id="cd"></p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+ 
+  var my_data = document.getElementById("data").value
+
+for(cnt=0;cnt<7;cnt++)	//for loop for number of component
+  {
+    // document.getElementById("cno"+cnt).innerHTML = JSON.parse(my_data)[cnt].component_number
+    // document.getElementById("cd"+cnt).innerHTML = JSON.parse(my_data)[cnt].component_description
+    document.getElementById("pieces"+cnt).innerHTML = JSON.parse(my_data)[cnt].total_pieces //pieces is the id used in table for number of pieces, my_data has all the data of component so sort pieces data using .pieces and send the filter data to pieces in the table, cnt is for machine M1 M2 M3 etc  
+    document.getElementById("avgct"+cnt).innerHTML = JSON.parse(my_data)[cnt].cycle_time
+    document.getElementById("mno"+cnt).innerHTML = JSON.parse(my_data)[cnt].machine_number
+    document.getElementById("md"+cnt).innerHTML = JSON.parse(my_data)[cnt].machine_description
+    document.getElementById("time"+cnt).innerHTML = JSON.parse(my_data)[cnt].time_date
+   }
+	document.getElementById("cno").innerHTML = JSON.parse(my_data)[0].component_number	//diplay the data on the card
+	document.getElementById("cd").innerHTML = JSON.parse(my_data)[0].component_description
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<!-- card W3 urls-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- machine data -->
+<!-- {{ machine_data }} -->
+<input type="hidden" id="data" name="variable" value="{{ machine_data }}">
+
+<head>
+  <title>Machine Dashboard</title>
+  <h1 align="center">Machine Dashboard</h1> <!-- heading of the page -->
+
+<style>
+
+/*styling of the image*/
+
+  img {
+    border: 1px solid black;
+    margin: 70px 10px 5px 10px;
+    float: left;
+   }
+ 
+/*styling of the table*/
+     table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+        margin: 300px 100px 100px 100px;  /*margin format= margin-top margin-right margin-bottom margin-left*/
+    }
+
+    th {
+        border: 1px solid #000000;
+        background-color: #B4D3DC;
+        text-align: center;
+        padding: 8px;
+        font-size: 18px;
+    }
+
+    td {
+        border: 1px solid #000000;
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      border: 1px solid #000000;
+        background-color: #dddddd;
+    }
+
+</style>
+
+<!-- chart code begins -->
+  
+<meta charset="UTF-8">
+<!-- jquery for the chart -->  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+  <script language="JavaScript">
+    // finction for cart
+    function displayLineChart() { 
+
+      // sending data to the chart
+      var data = {
+          labels: chart_time, //list chart_time data is passed as values on x-axis
+          datasets: [
+              {
+                  label: "Stops",
+                  fillColor: "rgba(220,220,220,0.2)",
+                  strokeColor: "rgba(220,220,220,1)",
+                  pointColor: "rgba(220,220,220,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(220,220,220,1)",
+                  data: chart_stops, //list chart_stops data is passed as values on y-axis
+                  
+              },
+              {
+                  label: "Pieces",
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  data: chart_pieces  //list chart_pieces data is passed as values on y-axis
+              }
+
+          ]
+
+      };
+      var ctx = document.getElementById("lineChart").getContext("2d");
+      var options = {};
+      var lineChart = new Chart(ctx).Line(data, options);
+    }
+ </script>
+</head>
+
+
+<body onload="displayLineChart();"> <!-- loads the chart as soon as the function is called -->
+
+<!-- chart -->
+
+ <div class="w3-display-topmiddle" style="margin: 100px 0px 0px 0px;">
+<!--  <h1> align="center">Pieces and Stops Chart</h1> --> 
+    <canvas id="lineChart"  height="500" width="700" margin="500px 100px 0px 0px "></canvas>
+
+  </div>
+
+  <script type="text/javascript">
+  setInterval("displayLineChart()",5000)  //displays latest values after every 5sec of interval
+</script>
+
+
+
+  <!-- image code-->
+
+<img src="http://www.solucoesindustriais.com.br/imagem.php?url=images/produtos/imagens_10003/moldedeinjecaoplastica_04-53-31.jpg&altura=300&largura=350" alt="Moulding Machine" width="200" height="200">
+
+
+<!-- Parameters Card Code-->
+
+<div  class="w3-display-topright" style="margin: 130px 20px 0px 20px; border: 1px solid #000000;">
+
+  <div class="w3-card-4" style="width:100%;" >
+    <header class="w3-container w3-blue">
+      <h1>Parameters</h1>
+    </header>
+
+    <div class="w3-container">
+      <h> Total Pieces: </h>
+      <p id="p0"></p>
+      <h> Average Cycle Time: </h>
+      <p id="c0"></p>
+      <h> Stops: </h>
+      <p id="s0"></p>
+      <h> Total Running Time: </h>
+      <p id="r0"></p>
+      <h> Total Downtime: </h>
+      <p id="d0"></p>
+    </div>
+  </div>
+</div>
+
+
+<!-- Detals Card Code-->
+
+
+<div class="w3-container">
+  <div class="w3-display-topleft" style="margin: 400px 10px 0px 10px; border: 1px solid #000000;">
+    <header class="w3-container w3-blue" style="width:100%;">
+      <h1>Details</h1>
+    </header>
+    <div class="w3-container">
+      <h> Machine Number: </h>
+      <p id="mno0"></p>
+      <h> Machine Description: </h>
+      <p id="md0"></p>
+    </div>
+  </div>
+</div>
+
+<!--Table Code -->
+
+ <table style="width:80%", border= 1px, align="center">
+
+    <tr>  <!-- heading row of the table -->
+        <th>Component Number</th> 
+        <th>Component Description</th>  
+        <th>Parameters</th>
+        <th id='time'></th>
+    </tr>
+
+    <tr>    <!-- row 1 -->
+            <td rowspan="4" id='cno0'></td> <!-- data row with row span 3 and id to show dinamic data of component number-->
+            <td rowspan="4" id='cd0'></td>
+            
+    </tr>
+
+    <tr>
+            <td>Total Pieces</td>
+            <td id='pieces0'></td>  <!-- id to show the dinamic data of number of pieces, id shows updated values of pieces0 i.e. pieces on machine 1 -->           
+    </tr>
+
+    <tr>
+            <td>Avg Cycle Time</td>
+            <td id='avgct0'></td>
+    </tr>
+
+    <tr>
+            <td>Total Stops</td>
+            <td id='stops0'></td>
+    </tr>
+
+
+    <tr>  <!-- row 2 -->
+            <td rowspan="4" id='cno1'></td>
+            <td rowspan="4" id='cd1'></td>       
+    </tr>
+
+    <tr>
+            <td>Total Pieces</td>
+            <td id='pieces1'></td>           
+    </tr>
+
+    <tr>
+            <td>Avg Cycle Time</td>
+            <td id='avgct1'></td>
+    </tr>
+
+    <tr>
+            <td>Total Stops</td>
+            <td id='stops1'></td>
+    </tr>
+
+
+    <tr>  <!-- row 3 -->
+            <td rowspan="4" id='cno2'></td>
+            <td rowspan="4" id='cd2'></td>            
+    </tr>
+
+    <tr>
+            <td>Total Pieces</td>
+            <td id='pieces2'></td>                        
+    </tr>
+
+    <tr>
+            <td>Avg Cycle Time</td>
+            <td id='avgct2'></td>
+    </tr>
+
+    <tr>
+            <td>Total Stops</td>
+            <td id='stops2'></td>
+    </tr>
+
+</table>
+
+
+<script>
+ 
+  var my_data = document.getElementById("data").value   //take all the data of machine in a variable my_data
+
+  var chart_time = new Array()  //list to store time data and display it on chart 
+  var chart_stops = new Array() //list to store number of stops data and display it on chart 
+  var chart_pieces = new Array() //list to store number of pieces data and display it on chart 
+
+  for(cnt=0;cnt<3;cnt++) //for loop for number of component
+    {
+      document.getElementById("cno"+cnt).innerHTML = JSON.parse(my_data)[cnt].component_number //cno is the id used in table for component number, my_data has all the data of machine so sort component number using .component_number and send the filter data to cno in the table, cnt is for component C1 C2 C3 etc
+      document.getElementById("cd"+cnt).innerHTML = JSON.parse(my_data)[cnt].component_description
+      document.getElementById("pieces"+cnt).innerHTML = JSON.parse(my_data)[cnt].total_pieces    
+      document.getElementById("avgct"+cnt).innerHTML = JSON.parse(my_data)[cnt].cycle_time    
+      document.getElementById("stops"+cnt).innerHTML = JSON.parse(my_data)[cnt].stops
+      chart_stops[cnt] = JSON.parse(my_data)[cnt].stops //saving stops data in the list chart_stops to display on chart
+      chart_pieces[cnt] = JSON.parse(my_data)[cnt].total_pieces //saving pieces data in the list chart_stops to display on chart
+      chart_time[cnt] = JSON.parse(my_data)[cnt].time_date //saving time data in the list chart_stops to display on chart   
+    }
+  document.getElementById("time").innerHTML = JSON.parse(my_data)[0].time_date //diplay the data on the card
+  document.getElementById("p0").innerHTML = JSON.parse(my_data)[0].total_pieces
+  document.getElementById("c0").innerHTML = JSON.parse(my_data)[0].cycle_time
+  document.getElementById("s0").innerHTML = JSON.parse(my_data)[0].stops
+  document.getElementById("r0").innerHTML = JSON.parse(my_data)[0].running_time
+  document.getElementById("d0").innerHTML = JSON.parse(my_data)[0].downtime
+  document.getElementById("mno0").innerHTML = JSON.parse(my_data)[0].downtime
+  document.getElementById("d0").innerHTML = JSON.parse(my_data)[0].downtime
+  document.getElementById("mno0").innerHTML = JSON.parse(my_data)[0].machine_number
+  document.getElementById("md0").innerHTML = JSON.parse(my_data)[0].machine_description
+
+</script>
+</body>
+</html>
