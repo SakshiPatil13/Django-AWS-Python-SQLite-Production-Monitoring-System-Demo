@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+{{ assign_machine_data }}
+<input type="hidden" id="data1" name="variable" value="{{ assign_machine_data }}">
+
+{{ assign_component_data }}
+<input type="hidden" id="data2" name="variable" value="{{ assign_component_data }}">
+
+<head>
+
+</head>
+<body>
+<!-- 	
+<h2>The input Element</h2>
+
+<form action="/show_machine">
+  Enter your name:
+  <input name="firstname" type="text">
+  <br><br>
+  <input type="submit">
+</form> -->
+
+<h2>Assign Components</h2>
+
+
+<p id="t"></p>
+<p id="t"></p>
+<p id="t"></p>
+<p id="t"></p>
+<!-- 
+<TABLE BORDER="1">
+
+    <tr>
+        <td id="mno0"></td>
+        <td id="md0"></td>
+<td>
+<p id="mno0"></p>
+<p id="mno0"></p>
+<p id="mno0"></p>
+<p id="mno0"></p>
+<select>
+
+	<option id="cno0"></option>
+	<option id="cno1"></option>
+	<option id="cno2"></option>
+	<option id="cno3"></option>
+	<option id="cno4"></option>
+	<option id="cno5"></option>
+
+</select>
+
+</td>
+
+
+</tr>
+    <tr>
+        <td id="mno1"></td>
+        <td id="md1"></td>
+<td id="cno0">
+
+</td">";
+
+</tr>
+</Table>
+ -->
+
+<script>
+
+ var my_data1 = document.getElementById("data1").value
+  var my_data2 = document.getElementById("data2").value
+document.getElementById("t").innerHTML = "6";
+document.getElementById("t").innerHTML = "7";
+
+for(cnt=0;cnt<1;cnt++)
+  {   
+  	document.getElementById("mno"+cnt).innerHTML = JSON.parse(my_data1)[cnt].machine_number
+   
+  	document.getElementById("md"+cnt).innerHTML = JSON.parse(my_data1)[cnt].machine_description
+}
+
+
+ for(cnt=0;cnt<6;cnt++)
+  {
+
+  document.getElementById("cno"+cnt).innerHTML = JSON.parse(my_data2)[cnt].component_number
+ 
+ 
+
+  // document.getElementById("cno"+cnt).innerHTML = JSON.parse(my_data2)[cnt].component_number
+  // document.getElementById("cno"+cnt).innerHTML = JSON.parse(my_data2)[cnt].component_number
+  // document.getElementById("cno"+cnt).innerHTML = JSON.parse(my_data2)[cnt].component_number
+  // document.getElementById("cno"+cnt).innerHTML = JSON.parse(my_data2)[cnt].component_number
+  // document.getElementById("cno"+cnt).innerHTML = JSON.parse(my_data2)[cnt].component_number
+}
+
+//   function show_machine(mno)
+// {
+//   // alert(cno)
+//   window.open("http://127.0.0.1:8000/componentdashboard/?mno0="+mno, "_self")
+ 
+//  }
+ </script>
+</body>
+</html>
